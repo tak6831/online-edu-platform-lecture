@@ -14,23 +14,23 @@ public class LectureController {
 
     public RouterFunction<ServerResponse> LectureRouter(LectureHandler lectureHandler) {
         return RouterFunctions.route()
-                .GET("/lecture", lectureHandler::getLectureList)
-                .GET("/lecture/{lectureId}", lectureHandler::getLecture)
-                .PATCH("/lecture/{lectureId}", lectureHandler::changeExposeLecture)
+                .GET("/lectures", lectureHandler::getLectureList)
+                .GET("/lectures/{lectureId}", lectureHandler::getLecture)
+                .PATCH("/lectures/{lectureId}", lectureHandler::changeExposeLecture)
 
-                .POST("/lecture/{lectureId}/enrolment", lectureHandler::enroleLecture)
-                .PATCH("/lecture/{lectureId}/matching", lectureHandler::matchTeacher)
+                .POST("/lectures/{lectureId}/enrolment", lectureHandler::enroleLecture)
+                .PATCH("/lectures/{lectureId}/matching", lectureHandler::matchTeacher)
 
-                .GET("/lecture/{lectureId}/content", lectureHandler::getContentList)
-                .POST("/lecture/{lectureId}/content", lectureHandler::uploadContent)
-                .GET("/lecture/{lectureId}/content/{contentId}", lectureHandler::getContent)
+                .GET("/lectures/{lectureId}/contents", lectureHandler::getContentList)
+                .POST("/lectures/{lectureId}/contents", lectureHandler::uploadContent)
+                .GET("/lectures/{lectureId}/contents/{contentId}", lectureHandler::getContent)
 
-                .GET("/lecture/{lectureId}/score", lectureHandler::getScore)
-                .POST("/lecture/{lectureId}/score/{userId}", lectureHandler::setScore)
+                .GET("/lectures/{lectureId}/score", lectureHandler::getScore)
+                .POST("/lectures/{lectureId}/score/{userId}", lectureHandler::setScore)
 
-                .GET("/lecture/{lectureId}/rating", lectureHandler::getRatingList)
-                .GET("/lecture/{lectureId}/rating", lectureHandler::getRating)
-                .POST("/lecture/{lectureId}/rating", lectureHandler::setRating)
+                .GET("/lectures/{lectureId}/rating", lectureHandler::getRatingList)
+                .GET("/lectures/{lectureId}/rating", lectureHandler::getRating)
+                .POST("/lectures/{lectureId}/rating", lectureHandler::setRating)
                 .build();
     }
 
