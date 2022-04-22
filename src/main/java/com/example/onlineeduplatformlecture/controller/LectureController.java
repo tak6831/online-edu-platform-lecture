@@ -17,13 +17,18 @@ public class LectureController {
                 .GET("/lecture", lectureHandler::getLectureList)
                 .GET("/lecture/{lectureId}", lectureHandler::getLecture)
                 .PATCH("/lecture/{lectureId}", lectureHandler::changeExposeLecture)
+
                 .POST("/lecture/{lectureId}/enrolment", lectureHandler::enroleLecture)
                 .PATCH("/lecture/{lectureId}/matching", lectureHandler::matchTeacher)
+
                 .GET("/lecture/{lectureId}/content", lectureHandler::getContentList)
                 .POST("/lecture/{lectureId}/content", lectureHandler::uploadContent)
                 .GET("/lecture/{lectureId}/content/{contentId}", lectureHandler::getContent)
+
                 .GET("/lecture/{lectureId}/score", lectureHandler::getScore)
                 .POST("/lecture/{lectureId}/score/{userId}", lectureHandler::setScore)
+
+                .GET("/lecture/{lectureId}/rating", lectureHandler::getRatingList)
                 .GET("/lecture/{lectureId}/rating", lectureHandler::getRating)
                 .POST("/lecture/{lectureId}/rating", lectureHandler::setRating)
                 .build();

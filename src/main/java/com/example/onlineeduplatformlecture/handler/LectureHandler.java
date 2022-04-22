@@ -28,7 +28,10 @@ public interface LectureHandler {
 
     Mono<ServerResponse> setScore(ServerRequest serverRequest);
 
+    Mono<ServerResponse> getRatingList(ServerRequest serverRequest);
+
     Mono<ServerResponse> getRating(ServerRequest serverRequest);
 
     Mono<ServerResponse> setRating(ServerRequest serverRequest);
+
 }
