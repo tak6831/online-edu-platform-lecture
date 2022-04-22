@@ -5,10 +5,10 @@ public class Rating {
     private final int ratingId;
     private final int lectureId;
     private final int userId;
-    private final int rating;
+    private final float rating;
     private final String comment;
 
-    public Rating(int ratingId, int lectureId, int userId, int rating, String comment) {
+    public Rating(int ratingId, int lectureId, int userId, float rating, String comment) {
         this.ratingId = ratingId;
         this.lectureId = lectureId;
         this.userId = userId;
@@ -28,7 +28,7 @@ public class Rating {
         return userId;
     }
 
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
 
