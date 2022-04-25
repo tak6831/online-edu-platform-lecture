@@ -10,13 +10,13 @@
 
 ##### Header
 
-> | name             | Description      | Required |
-------------------|--------|------------------|-----------|
+> | name   | Description      | Required |
+  > |--------|------------------|-----------|
 > | `Authorization` |   사용자 인증 수단, 액세스 토큰 값     | O |
 ##### Responses
 
-> | name        |  type      | Description      | Required |
--------------|--------|------------|----------------|---|
+> | name   |  type      | Description      | Required |
+  > |--------|------------|----------------|---|
 > | `elements` |  Integer[]  | 강의ID 목록     | O |
 
 </details>
@@ -30,20 +30,20 @@
 
 ##### Header
 
-> | name             | Description      | Required |
-------------------|--------|------------------|-----------|
+> | name   | Description      | Required |
+> |--------|------------------|-----------|
 > | `Authorization` |   사용자 인증 수단, 액세스 토큰 값     | O |
 ##### Parameters
 
-> | name         |  type      | Description      | Required |
---------------|--------|------------|----------------|---|
+> | name   |  type      | Description      | Required |
+> |--------|------------|----------------|---|
 > | `lectureId` |  Integer  | 강의 ID     | O |
 
 ##### Responses
 
-> | name       |  type      | Description      | Required |
-------------|--------|------------|----------------|---|
-> | `title`   |  String  | 강의명     | O |
+> | name   |  type      | Description      | Required |
+> |--------|------------|----------------|---|
+> | `title` |  String  | 강의명     | O |
 > | `location` |  String  | 강의 장소     | O |
 
 </details>
@@ -57,13 +57,13 @@
 
 ##### Header
 
-> | name             | Description      | Required |
-------------------|--------|------------------|-----------|
+> | name   | Description      | Required |
+> |--------|------------------|-----------|
 > | `Authorization` |   사용자 인증 수단, 액세스 토큰 값     | O |
 ##### Responses
 
-> | name        |  type      | Description      | Required |
--------------|--------|------------|----------------|---|
+> | name   |  type      | Description      | Required |
+> |--------|------------|----------------|---|
 > | `elements` |  Integer[]  | 콘텐츠 ID 목록     | O |
 
 </details>
@@ -79,15 +79,15 @@
 
 ##### Header
 
-> | name             | Description      | Required |
-------------------|--------|------------------|-----------|
+> | name   | Description      | Required |
+> |--------|------------------|-----------|
 > | `Authorization` |   사용자 인증 수단, 액세스 토큰 값     | O |
 ##### Responses
 
-> | name       |  type      | Description      | Required |
-------------|--------|------------|----------------|---|
+> | name   |  type      | Description      | Required |
+> |--------|------------|----------------|---|
 > | `content` |  String  | 콘텐츠     | O |
-> | `examYn`   |  String  | 시험유무     |  |
+> | `examYn` |  String  | 시험유무     |  |
 
 </details>
 
@@ -100,14 +100,14 @@
 
 ##### Header
 
-> | name             | Description      | Required |
-------------------|--------|------------------|-----------|
+> | name   | Description      | Required |
+> |--------|------------------|-----------|
 > | `Authorization` |   사용자 인증 수단, 액세스 토큰 값     | O |
 ##### Responses
 
-> | name      |  type      | Description      | Required |
------------|--------|------------|----------------|---|
-> | `score`  |  String  | 성적     | O |
+> | name   |  type      | Description      | Required |
+> |--------|------------|----------------|---|
+> | `score` |  String  | 성적     | O |
 > | `comment` |  String  | 코멘트     |  |
 
 </details>
@@ -122,14 +122,14 @@
 
 ##### Header
 
-> | name             | Description      | Required |
-------------------|--------|------------------|-----------|
+> | name   | Description      | Required |
+> |--------|------------------|-----------|
 > | `Authorization` |   사용자 인증 수단, 액세스 토큰 값     | O |
 ##### Responses
 
-> | name              |  type      | Description      | Required |
--------------------|--------|------------|----------------|---|
-> | `elements`        |  Integer[]  | 별점 ID 목록    | O |
+> | name   |  type      | Description      | Required |
+> |--------|------------|----------------|---|
+> | `elements` |  Integer[]  | 별점 ID 목록    | O |
 > | `average_rating` |  String  | 별점 평균     |  |
 
 </details>
@@ -144,14 +144,14 @@
 
 ##### Header
 
-> | name             | Description      | Required |
-------------------|--------|------------------|-----------|
+> | name   | Description      | Required |
+> |--------|------------------|-----------|
 > | `Authorization` |   사용자 인증 수단, 액세스 토큰 값     | O |
 ##### Responses
 
-> | name       |  type      | Description      | Required |
-------------|--------|------------|----------------|---|
-> | `rating`   |  Float  | 별점     | O |
+> | name   |  type      | Description      | Required |
+> |--------|------------|----------------|---|
+> | `rating` |  Float  | 별점     | O |
 > | `comment` |  String  | 코멘트     |  |
 
 </details>
@@ -185,6 +185,7 @@
 
 </details>
 
+
 <details>
   <summary>
     <code>POST</code> 
@@ -194,19 +195,19 @@
 
 ##### Header
 
-> | name             | Description      | Required |
-------------------|--------|------------------|-----------|
+> | name   | Description      | Required |
+> |--------|------------------|-----------|
 > | `Authorization` |   사용자 인증 수단, 액세스 토큰 값     | O |
 ##### Parameters
 
-> | name      |  type      | Description      | Required |
------------|--------|------------|----------------|---|
+> | name   |  type      | Description      | Required |
+> |--------|------------|----------------|---|
 > | `userId` |  Integer  | 회원 ID     | O |
 
 ##### Responses
 
-> | name           |  type      | Description      | Required |
-----------------|--------|------------|----------------|---|
+> | name   |  type      | Description      | Required |
+> |--------|------------|----------------|---|
 > | `enrolmentId` |  Integer  | 수강신청 ID     | O |
 
 </details>
@@ -220,20 +221,20 @@
 
 ##### Header
 
-> | name             | Description      | Required |
-------------------|--------|------------------|-----------|
+> | name   | Description      | Required |
+> |--------|------------------|-----------|
 > | `Authorization` |   사용자 인증 수단, 액세스 토큰 값     | O |
 ##### Parameters
 
-> | name         |  type      | Description      | Required |
---------------|--------|------------|----------------|---|
+> | name   |  type      | Description      | Required |
+> |--------|------------|----------------|---|
 > | `lectureId` |  Integer  | 강의 ID     | O |
-> | `userId`     |  Integer  | 강사 회원 ID     | O |
+> | `userId` |  Integer  | 강사 회원 ID     | O |
 
 ##### Responses
 
-> | name          |  type      | Description      | Required |
----------------|--------|------------|----------------|---|
+> | name   |  type      | Description      | Required |
+> |--------|------------|----------------|---|
 > | `matchingId` |  Integer  | 매칭 ID     | O |
 
 </details>
@@ -247,20 +248,20 @@
 
 ##### Header
 
-> | name             | Description      | Required |
-------------------|--------|------------------|-----------|
+> | name   | Description      | Required |
+> |--------|------------------|-----------|
 > | `Authorization` |   사용자 인증 수단, 액세스 토큰 값     | O |
 ##### Parameters
 
-> | name       |  type      | Description      | Required |
-------------|--------|------------|----------------|---|
+> | name   |  type      | Description      | Required |
+> |--------|------------|----------------|---|
 > | `content` |  String  | 컨텐츠     | O |
-> | `examYn`   |  String  | 시험유무     |  |
+> | `examYn` |  String  | 시험유무     |  |
 
 ##### Responses
 
-> | name         |  type      | Description      | Required |
---------------|--------|------------|----------------|---|
+> | name   |  type      | Description      | Required |
+> |--------|------------|----------------|---|
 > | `contentId` |  Integer  | 콘텐츠 ID     | O |
 
 </details>
@@ -274,20 +275,20 @@
 
 ##### Header
 
-> | name             | Description      | Required |
-------------------|--------|------------------|-----------|
+> | name   | Description      | Required |
+> |--------|------------------|-----------|
 > | `Authorization` |   사용자 인증 수단, 액세스 토큰 값     | O |
 ##### Parameters
 
-> | name      |  type      | Description      | Required |
------------|--------|------------|----------------|---|
-> | `score`  |  String  | 성적     | O |
+> | name   |  type      | Description      | Required |
+> |--------|------------|----------------|---|
+> | `score` |  String  | 성적     | O |
 > | `comment` |  String  | 코멘트     |  |
 
 ##### Responses
 
-> | name       |  type      | Description      | Required |
-------------|--------|------------|----------------|---|
+> | name   |  type      | Description      | Required |
+> |--------|------------|----------------|---|
 > | `scoreId` |  Integer  | 성적 ID     | O |
 
 </details>
@@ -301,20 +302,20 @@
 
 ##### Header
 
-> | name             | Description      | Required |
-------------------|--------|------------------|-----------|
+> | name   | Description      | Required |
+> |--------|------------------|-----------|
 > | `Authorization` |   사용자 인증 수단, 액세스 토큰 값     | O |
 ##### Parameters
 
-> | name      |  type      | Description      | Required |
------------|--------|------------|----------------|---|
+> | name   |  type      | Description      | Required |
+> |--------|------------|----------------|---|
 > | `rating` |  Float  | 별점     | O |
 > | `comment` |  String  | 코멘트     |  |
 
 ##### Responses
 
-> | name        |  type      | Description      | Required |
--------------|--------|------------|----------------|---|
+> | name   |  type      | Description      | Required |
+> |--------|------------|----------------|---|
 > | `ratingId` |  Integer  | 별점 ID     | O |
 
 </details>
@@ -330,19 +331,19 @@
 
 ##### Header
 
-> | name             | Description      | Required |
-------------------|--------|------------------|-----------|
+> | name   | Description      | Required |
+> |--------|------------------|-----------|
 > | `Authorization` |   사용자 인증 수단, 액세스 토큰 값     | O |
 ##### Parameters
 
-> | name         |  type      | Description      | Required |
---------------|--------|------------|----------------|---|
+> | name   |  type      | Description      | Required |
+> |--------|------------|----------------|---|
 > | `lectureId` |  Integer  | 강의 ID     | O |
 
 ##### Responses
 
-> | name         |  type      | Description      | Required |
---------------|--------|------------|----------------|---|
+> | name   |  type      | Description      | Required |
+> |--------|------------|----------------|---|
 > | `exposedYn` |  String  | 강의 노출 유무  | O |
 
 </details>
