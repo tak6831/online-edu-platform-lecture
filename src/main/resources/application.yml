@@ -1,3 +1,7 @@
+spring:
+  application:
+    name: lecture-service
+
 server:
   port: 0
 eureka:
