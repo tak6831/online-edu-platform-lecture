@@ -11,6 +11,7 @@ public interface LectureHandler {
 
     Mono<ServerResponse> getLectureList(ServerRequest serverRequest);
     Mono<ServerResponse> getLecture(ServerRequest serverRequest);
+    Mono<ServerResponse> createLecture(ServerRequest serverRequest);
     Mono<ServerResponse> changeExposeLecture(ServerRequest serverRequest);
 
     Mono<ServerResponse> enrollLecture(ServerRequest serverRequest);

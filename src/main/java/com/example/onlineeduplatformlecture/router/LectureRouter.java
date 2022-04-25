@@ -17,6 +17,7 @@ public class LectureRouter {
                 // Lecture
                 .GET("/lectures", lectureHandler::getLectureList)
                 .GET("/lectures/{lectureId}", lectureHandler::getLecture)
+                .POST("/lectures", lectureHandler::createLecture)
                 .PATCH("/lectures/{lectureId}", lectureHandler::changeExposeLecture)
 
                 //Enrolment & Matching
