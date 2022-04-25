@@ -162,7 +162,7 @@
   <summary>
     <code>POST</code> 
     <code><b>/lectures</b></code> 
-    <code>(강의 등록)</code>
+    <code>(강의 개설)</code>
   </summary>
 
 ##### Header
