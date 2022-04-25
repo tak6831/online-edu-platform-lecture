@@ -1,4 +1,4 @@
-package com.example.onlineeduplatformlecture.controller;
+package com.example.onlineeduplatformlecture.router;
 
 
 import com.example.onlineeduplatformlecture.handler.LectureHandler;
@@ -10,26 +10,31 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 @Configuration
 @EnableWebFlux
-public class LectureController {
+public class LectureRouter {
 
-    public RouterFunction<ServerResponse> LectureRouter(LectureHandler lectureHandler) {
+    public RouterFunction<ServerResponse> lectureRouter(LectureHandler lectureHandler) {
         return RouterFunctions.route()
+                // Lecture
                 .GET("/lectures", lectureHandler::getLectureList)
                 .GET("/lectures/{lectureId}", lectureHandler::getLecture)
                 .PATCH("/lectures/{lectureId}", lectureHandler::changeExposeLecture)
 
-                .POST("/lectures/{lectureId}/enrolment", lectureHandler::enroleLecture)
+                //Enrolment & Matching
+                .POST("/lectures/{lectureId}/enrolment", lectureHandler::enrollLecture)
                 .PATCH("/lectures/{lectureId}/matching", lectureHandler::matchTeacher)
 
+                // Content
                 .GET("/lectures/{lectureId}/contents", lectureHandler::getContentList)
                 .POST("/lectures/{lectureId}/contents", lectureHandler::uploadContent)
                 .GET("/lectures/{lectureId}/contents/{contentId}", lectureHandler::getContent)
 
+                // Score
                 .GET("/lectures/{lectureId}/score", lectureHandler::getScore)
                 .POST("/lectures/{lectureId}/score/{userId}", lectureHandler::setScore)
 
+                // Rating
                 .GET("/lectures/{lectureId}/rating", lectureHandler::getRatingList)
-                .GET("/lectures/{lectureId}/rating", lectureHandler::getRating)
+                .GET("/lectures/{lectureId}/rating/{ratingId}", lectureHandler::getRating)
                 .POST("/lectures/{lectureId}/rating", lectureHandler::setRating)
                 .build();
     }

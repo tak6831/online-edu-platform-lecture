@@ -1,23 +1,23 @@
-package com.example.onlineeduplatformlecture.domain;
+package com.example.onlineeduplatformlecture.model;
 
-public class Score {
+public class Rating {
 
-    private final int scoreId;
+    private final int ratingId;
     private final int lectureId;
     private final int userId;
-    private final String score;
+    private final float rating;
     private final String comment;
 
-    public Score(int scoreId, int lectureId, int userId, String score, String comment) {
-        this.scoreId = scoreId;
+    public Rating(int ratingId, int lectureId, int userId, float rating, String comment) {
+        this.ratingId = ratingId;
         this.lectureId = lectureId;
         this.userId = userId;
-        this.score = score;
+        this.rating = rating;
         this.comment = comment;
     }
 
-    public int getScoreId() {
-        return scoreId;
+    public int getRatingId() {
+        return ratingId;
     }
 
     public int getLectureId() {
@@ -28,11 +28,12 @@ public class Score {
         return userId;
     }
 
-    public String getScore() {
-        return score;
+    public float getRating() {
+        return rating;
     }
 
     public String getComment() {
         return comment;
     }
+
 }

@@ -1,4 +1,4 @@
-package com.example.onlineeduplatformlecture.domain;
+package com.example.onlineeduplatformlecture.model;
 
 public class Enrolment {
 
