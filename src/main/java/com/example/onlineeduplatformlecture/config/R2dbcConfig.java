@@ -20,12 +20,11 @@ public class R2dbcConfig extends AbstractR2dbcConfiguration {
 
     @Override
     public ConnectionFactory connectionFactory() {
-//        return new H2ConnectionFactory(H2ConnectionConfiguration.builder()
-//                .inMemory("mem")
-//                .property(H2ConnectionOption.DB_CLOSE_DELAY, "-1")
-//                .username("sa")
-//                .build());
-        return null;
+        return new H2ConnectionFactory(H2ConnectionConfiguration.builder()
+                .inMemory("testdb")
+                .property(H2ConnectionOption.DB_CLOSE_DELAY, "-1")
+                .username("sa")
+                .build());
     }
 
     @Bean
