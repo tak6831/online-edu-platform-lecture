@@ -3,10 +3,12 @@ package com.example.onlineeduplatformlecture.handler;
 import com.example.onlineeduplatformlecture.model.Rating;
 import com.example.onlineeduplatformlecture.repository.RatingRepository;
 import com.example.onlineeduplatformlecture.service.RatingService;
+import java.util.Map;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 
@@ -24,25 +26,40 @@ public class RatingHandler {
     }
 
     public Mono<ServerResponse> getRatingList(ServerRequest request) {
-        return null;
+        Mono<ServerResponse> notFound = ServerResponse.notFound().build();
+
+        int lectureId = Integer.parseInt(request.pathVariable("lectureId"));
+
+        Flux<Rating> ratings = this.ratingRepository.findAll();
+
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
+                .body(ratings, Rating.class);
+
+//        return Mono.just(ratingRepository.findById(lectureId))
+//                .flatMap(rating -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(Mono.just(rating), Rating.class).switchIfEmpty(notFound));
+
+//        return ServerResponse
+//                .ok()
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .body(ratingMono, Rating.class)
+//                .switchIfEmpty(notFound);
+
     }
 
     public Mono<ServerResponse> getRating(ServerRequest request) {
+        Mono<ServerResponse> notFound = ServerResponse.notFound().build();
+        int lectureId = Integer.parseInt(request.pathVariable("lectureId"));
+        int ratingId = Integer.parseInt(request.pathVariable("ratingId"));
 
-        String lectureId = request.pathVariable("lectureId");
-        String ratingId = request.pathVariable("ratingId");
+        Mono<Rating> ratingMono = ratingRepository
+                .findRatingById(lectureId, ratingId)
+                .log();
 
-        if ((!lectureId.isBlank()) && (!ratingId.isBlank())) {
-
-            Mono<Rating> ratingMono = ratingRepository
-                    .findRatingById(Integer.valueOf(lectureId), Integer.valueOf(ratingId))
-                    .log();
-
-            return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-                    .body(ratingMono, Rating.class);
-        }
-
-        return ServerResponse.notFound().build();
+        return ServerResponse
+                .ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(ratingMono, Rating.class)
+                .switchIfEmpty(notFound);
     }
 
     public Mono<ServerResponse> saveRating(ServerRequest request) {
