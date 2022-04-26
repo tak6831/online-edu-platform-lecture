@@ -25,26 +25,16 @@ public class R2dbcConfig extends AbstractR2dbcConfiguration {
 //                .property(H2ConnectionOption.DB_CLOSE_DELAY, "-1")
 //                .username("sa")
 //                .build());
-
         return null;
     }
-
-//    @Bean
-//    public ConnectionFactoryInitializer r2dbInitializer() {
-//        ConnectionFactoryInitializer initializer = new ConnectionFactoryInitializer();
-//        ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator();
-//        resourceDatabasePopulator.addScript(new ClassPathResource("rating.sql"));
-//
-//        initializer.setConnectionFactory(connectionFactory());
-//        initializer.setDatabasePopulator(resourceDatabasePopulator);
-//        return initializer;
-//    }
 
     @Bean
     public ConnectionFactoryInitializer initializer(ConnectionFactory connectionFactory) {
         ConnectionFactoryInitializer initializer = new ConnectionFactoryInitializer();
         initializer.setConnectionFactory(connectionFactory);
-        ResourceDatabasePopulator populator = new ResourceDatabasePopulator(new ClassPathResource("rating.sql"));
+        ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+        populator.addScript(new ClassPathResource("rating.sql"));
+        populator.addScript(new ClassPathResource("schema.sql"));
         initializer.setDatabasePopulator(populator);
         return initializer;
     }
