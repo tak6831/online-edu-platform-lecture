@@ -15,8 +15,8 @@ public class LectureRouter {
     public RouterFunction<ServerResponse> lectureRouter(LectureHandler lectureHandler) {
         return RouterFunctions.route()
                 // Lecture
-//                .GET("/lectures", lectureHandler::getLectureList)
-//                .GET("/lectures/{lectureId}", lectureHandler::getLecture)
+                .GET("/lectures", lectureHandler::getLectureList)
+                .GET("/lectures/{lectureId}", lectureHandler::getLecture)
 //                .POST("/lectures", lectureHandler::createLecture)
 //                .PATCH("/lectures/{lectureId}", lectureHandler::changeExposeLecture)
 //
@@ -25,9 +25,9 @@ public class LectureRouter {
 //                .PATCH("/lectures/{lectureId}/matching", lectureHandler::matchTeacher)
 //
 //                // Content
-//                .GET("/lectures/{lectureId}/contents", lectureHandler::getContentList)
+                .GET("/lectures/{lectureId}/contents", lectureHandler::getContentList)
 //                .POST("/lectures/{lectureId}/contents", lectureHandler::uploadContent)
-//                .GET("/lectures/{lectureId}/contents/{contentId}", lectureHandler::getContent)
+                .GET("/lectures/{lectureId}/contents/{contentId}", lectureHandler::getContent)
 //
 //                // Score
 //                .GET("/lectures/{lectureId}/score", lectureHandler::getScore)
