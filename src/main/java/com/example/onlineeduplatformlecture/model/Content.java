@@ -15,13 +15,14 @@ public class Content {
 
     @Id
     @Column(value = "content_id")
-    private final int contentId;
+    private  int contentId;
 
     @Column(value = "lecture_id")
-    private final int lectureId;
-    @Column(value = "cotent")
-    private final String content;
-    private final boolean examYn;
+    private  int lectureId;
+    @Column(value = "content")
+    private  String content;
+    @Column(value = "exam_yn")
+    private  boolean examYn;
 
     @CreatedDate
     LocalDateTime createdAt;

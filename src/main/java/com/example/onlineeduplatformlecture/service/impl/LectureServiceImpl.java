@@ -25,7 +25,7 @@ public class LectureServiceImpl implements LectureService {
     // GET /lectures/{lectureId} (강의 열람)
 
     @Override
-    public Mono<Lecture> getLecture(int lectureId) {
+    public Mono<Lecture> getLecture(Long lectureId) {
         return lectureRepository.findByLectureId(lectureId);
     }
 
