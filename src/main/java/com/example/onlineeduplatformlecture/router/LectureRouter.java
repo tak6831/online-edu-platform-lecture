@@ -33,10 +33,10 @@ public class LectureRouter {
 //                .GET("/lectures/{lectureId}/score", lectureHandler::getScore)
 //                .POST("/lectures/{lectureId}/score/{userId}", lectureHandler::setScore)
 
-                // Rating
-                .GET("/lectures/{lectureId}/rating", lectureHandler::getRatingList)
-                .GET("/lectures/{lectureId}/rating/{ratingId}", lectureHandler::getRating)
-                .POST("/lectures/{lectureId}/rating", lectureHandler::setRating)
+//                // Rating
+//                .GET("/lectures/{lectureId}/rating", lectureHandler::getRatingList)
+//                .GET("/lectures/{lectureId}/rating/{ratingId}", lectureHandler::getRating)
+//                .POST("/lectures/{lectureId}/rating", lectureHandler::setRating)
                 .build();
     }
 

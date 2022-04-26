@@ -1,49 +1,44 @@
 package com.example.onlineeduplatformlecture.model;
 
+import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
+@Table(value = "RATING")
+@Getter
+@Setter
+@AllArgsConstructor
+@ToString
 public class Rating {
 
-    private final int ratingId;
-    private final int lectureId;
-    private final int userId;
-    private final float rating;
-    private final String comment;
+    @Id
+    @Column(value = "rating_id")
+    Integer ratingId;
 
-    public int getRatingId() {
-        return ratingId;
-    }
+    @Column(value = "lecture_id")
+    Integer lectureId;
 
-    public int getLectureId() {
-        return lectureId;
-    }
+    @Column(value = "user_id")
+    Integer userId;
 
-    public int getUserId() {
-        return userId;
-    }
+    @Column(value = "rating")
+    Double rating;
 
-    public float getRating() {
-        return rating;
-    }
+    @Column(value = "lecture_id")
+    String comment;
 
-    public String getComment() {
-        return comment;
-    }
+    @CreatedDate
+    LocalDateTime createdAt;
 
-    public Rating(int ratingId, int lectureId, int userId, float rating, String comment) {
-        this.ratingId = ratingId;
-        this.lectureId = lectureId;
-        this.userId = userId;
-        this.rating = rating;
-        this.comment = comment;
-    }
+    @LastModifiedDate
+    LocalDateTime updatedAt;
 
-    @Override
-    public String toString() {
-        return "Rating{" +
-                "ratingId=" + ratingId +
-                ", lectureId=" + lectureId +
-                ", userId=" + userId +
-                ", rating=" + rating +
-                ", comment='" + comment + '\'' +
-                '}';
-    }
 }
