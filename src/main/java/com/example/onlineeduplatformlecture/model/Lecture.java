@@ -1,42 +1,39 @@
 package com.example.onlineeduplatformlecture.model;
 
-import lombok.Data;
+import lombok.*;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
-@Data
+import java.time.LocalDateTime;
+
+@Table(value = "LECTURE")
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Lecture {
 
     @Id
-    private final int lectureId;
-    private final String title;
-    private final String location;
+    @Column(value = "lecture_id")
+    private  int lectureId;
+
+    @Column(value = "title")
+    private  String title;
+    @Column(value = "location")
+    private  String location;
+    @Column(value = "exposed_yn")
     private int exposedYn;
 
-    public Lecture(int lecture_id, String title, String location) {
-        this.lectureId = lecture_id;
-        this.title = title;
-        this.location = location;
-        this.exposedYn = 0;
-    }
+    @CreatedDate
+    LocalDateTime createdAt;
 
-    public int getLectureId() {
-        return lectureId;
-    }
+    @LastModifiedDate
+    LocalDateTime updatedAt;
 
-    public String getTitle() {
-        return title;
-    }
-
-    public int getExposedYn() {
-        return exposedYn;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setExposedYn(int exposedYn) {
-        this.exposedYn = exposedYn;
-    }
 }
