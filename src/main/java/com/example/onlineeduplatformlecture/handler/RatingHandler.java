@@ -45,17 +45,13 @@ public class RatingHandler {
     }
 
     public Mono<ServerResponse> saveRating(ServerRequest request) {
+        Mono<Rating> ratingMono = request.bodyToMono(Rating.class)
+                .onErrorResume(throwable -> {
+                    System.out.println(throwable.getMessage());
+                    return Mono.error(new RuntimeException(throwable));
+                });
 
-//        Mono<Rating> ratingMono = request.bodyToMono(Rating.class)
-//            .flatMap(ratingService::saveRate)
-//                .log(">>>> saveRating Service: ");
-//
-//        return ServerResponse.ok()
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .body(ratingMono, Rating.class)
-//                .log(">>> saveRating Response: ")
-//                .onErrorResume(error -> ServerResponse.badRequest().build());
-
-        return null;
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(
+                ratingMono.flatMap(this.ratingRepository::save), Rating.class);
     }
 }

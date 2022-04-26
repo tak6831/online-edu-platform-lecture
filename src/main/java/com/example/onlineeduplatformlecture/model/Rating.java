@@ -21,7 +21,14 @@ public class Rating {
     private Long lectureId;
     private Long userId;
     private Double rating;
+    private String comment;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
+    public Rating(Long lectureId, Long userId, Double rating, String comment) {
+        this.lectureId = lectureId;
+        this.userId = userId;
+        this.rating = rating;
+        this.comment = comment;
+    }
 }
