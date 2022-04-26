@@ -19,9 +19,8 @@ public class LectureHandler {
     RatingService ratingService;
 
 //    Mono<ServerResponse> getLectureList(ServerRequest serverRequest);
-//    Mono<ServerResponse> getLecture(ServerRequest serverRequest);
 //    Mono<ServerResponse> createLecture(ServerRequest serverRequest);
-//    Mono<ServerResponse> changeExposeLecture(ServerRequest serverRequest);
+//    Mono<ServerResponse> getLecture(ServerRequest serverRequest);
 //
 //    Mono<ServerResponse> enrollLecture(ServerRequest serverRequest);
 //
@@ -31,8 +30,6 @@ public class LectureHandler {
 //    Mono<ServerResponse> uploadContent(ServerRequest serverRequest);
 //    Mono<ServerResponse> getContent(ServerRequest serverRequest);
 //
-//    Mono<ServerResponse> getScore(ServerRequest serverRequest);
-//    Mono<ServerResponse> setScore(ServerRequest serverRequest);
 
     public Mono<ServerResponse> getRatingList(ServerRequest serverRequest){
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(fromObject(ratingService.getRatingList()));
@@ -45,5 +42,15 @@ public class LectureHandler {
         Rating rating = serverRequest.bodyToMono(Rating.class).block();
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(ratingService.saveRating(rating));
     };
+    public Mono<ServerResponse> getScore(ServerRequest serverRequest){
+        return null;
+    };
+    public Mono<ServerResponse> setScore(ServerRequest serverRequest){
+        return null;
+    };
+    public Mono<ServerResponse> changeExposeLecture(ServerRequest serverRequest){
+        return null;
+    };
+
 
 }

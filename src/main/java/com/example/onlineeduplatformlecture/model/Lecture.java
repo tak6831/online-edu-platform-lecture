@@ -1,36 +1,73 @@
 package com.example.onlineeduplatformlecture.model;
 
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="LECTURE")
 public class Lecture {
 
-    private final int lectureId;
-    private final String title;
-    private final String location;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="LECTURE_ID ")
+    private int lectureId;
+    @Column(name="TITLE")
+    private String title;
+    @Column(name="LOCATION")
+    private String location;
+    @Column(name="EXPOSED_YN")
     private int exposedYn;
 
-    public Lecture(int lecture_id, String title, String location) {
-        this.lectureId = lecture_id;
-        this.title = title;
-        this.location = location;
-        this.exposedYn = 0;
+    public Lecture() {
+
     }
 
     public int getLectureId() {
         return lectureId;
     }
 
+    public void setLectureId(int lectureId) {
+        this.lectureId = lectureId;
+    }
+
     public String getTitle() {
         return title;
     }
 
-    public int getExposedYn() {
-        return exposedYn;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getLocation() {
         return location;
     }
 
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public int getExposedYn() {
+        return exposedYn;
+    }
+
     public void setExposedYn(int exposedYn) {
         this.exposedYn = exposedYn;
+    }
+
+    public Lecture(String title, String location) {
+        this.title = title;
+        this.location = location;
+        this.exposedYn = 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Lecture{" +
+                "lectureId=" + lectureId +
+                ", title='" + title + '\'' +
+                ", location='" + location + '\'' +
+                ", exposedYn=" + exposedYn +
+                '}';
     }
 }

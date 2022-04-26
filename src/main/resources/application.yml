@@ -1,6 +1,27 @@
 spring:
+  h2:
+    console:
+      path: /h2-web
+      enabled: true
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:tcp://localhost/~/test
+      driver-class-name: org.h2.Driver
+      username: sa
+      password:
   application:
     name: lecture-service
+  jpa:
+    hibernate:
+      ddl-auto: create
+      properties:
+        hibernate:
+          show_sql: true
+          format_sql: true
+    show-sql: true
+
+logging.level:
+  org.hibernate.SQL: debug
 
 server:
   port: 0
@@ -12,3 +33,4 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
+
