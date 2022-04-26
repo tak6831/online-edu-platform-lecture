@@ -1,7 +1,13 @@
 package com.example.onlineeduplatformlecture.model;
 
+import lombok.Data;
+
+import javax.persistence.Id;
+
+@Data
 public class Lecture {
 
+    @Id
     private final int lectureId;
     private final String title;
     private final String location;
