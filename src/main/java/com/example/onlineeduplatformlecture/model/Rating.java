@@ -16,7 +16,6 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table(value = "rating")
 @Getter
 @Setter
-@AllArgsConstructor
 @ToString
 public class Rating {
 

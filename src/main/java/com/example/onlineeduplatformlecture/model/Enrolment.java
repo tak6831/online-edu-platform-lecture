@@ -2,32 +2,31 @@ package com.example.onlineeduplatformlecture.model;
 
 import lombok.Data;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
+import java.time.LocalDateTime;
 
 @Data
+@Table(value = "ENROLLMENT")
 public class Enrolment {
 
     @Id
+    @Column(value = "enrollment_id")
     private final int enrolmentId;
+    @Column(value = "lecture_id")
     private final int lectureId;
+
+    @Column(value = "user_id")
     private final int userId;
 
-    public Enrolment(int enrolmentId, int lectureId, int userId) {
-        this.enrolmentId = enrolmentId;
-        this.lectureId = lectureId;
-        this.userId = userId;
-    }
+    @CreatedDate
+    LocalDateTime createdAt;
 
-    public int getEnrolmentId() {
-        return enrolmentId;
-    }
-
-    public int getLectureId() {
-        return lectureId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
+    @LastModifiedDate
+    LocalDateTime updatedAt;
 
 }
