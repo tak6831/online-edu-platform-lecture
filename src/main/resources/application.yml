@@ -1,6 +1,10 @@
 spring:
   application:
     name: lecture-service
+  r2dbc:
+    url: r2dbc:h2:mem:///msa
+    username: sa
+    password:
 
 server:
   port: 0
@@ -12,3 +16,9 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
+
+logging:
+  level:
+    root: INFO
+    org.springframework.r2dbc: DEBUG
+#debug: true

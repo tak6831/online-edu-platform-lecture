@@ -34,16 +34,16 @@ public class LectureHandler {
 //    Mono<ServerResponse> getScore(ServerRequest serverRequest);
 //    Mono<ServerResponse> setScore(ServerRequest serverRequest);
 
-    public Mono<ServerResponse> getRatingList(ServerRequest serverRequest){
-        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(fromObject(ratingService.getRatingList()));
-    };
-
-    public Mono<ServerResponse> getRating(ServerRequest serverRequest){
-        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(ratingService.getRating());
-    };
-    public Mono<ServerResponse> setRating(ServerRequest serverRequest){
-        Rating rating = serverRequest.bodyToMono(Rating.class).block();
-        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(ratingService.saveRating(rating));
-    };
+//    public Mono<ServerResponse> getRatingList(ServerRequest serverRequest){
+//        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(fromObject(ratingService.getRatingList()));
+//    };
+//
+//    public Mono<ServerResponse> getRating(ServerRequest serverRequest){
+//        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(ratingService.getRating());
+//    };
+//    public Mono<ServerResponse> setRating(ServerRequest serverRequest){
+//        Rating rating = serverRequest.bodyToMono(Rating.class).block();
+//        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(ratingService.saveRating(rating));
+//    };
 
 }
