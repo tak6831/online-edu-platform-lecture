@@ -2,17 +2,13 @@ package com.example.onlineeduplatformlecture.repository;
 
 import com.example.onlineeduplatformlecture.model.Rating;
 import org.springframework.data.r2dbc.repository.Query;
-import org.springframework.data.repository.reactive.ReactiveSortingRepository;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@Repository
-public interface RatingRepository extends ReactiveSortingRepository<Rating, Integer> {
+public interface RatingRepository extends ReactiveCrudRepository<Rating, Long> {
 
-    @Query("SELECT rating_id, user_id, rating, comment, created_at, updated_at FROM RATING WHERE lecture_id = $1")
-    Flux<Rating> findById(int lectureId);
-
-    @Query("SELECT user_id, rating, comment, created_at, updated_at FROM RATING WHERE lecture_id = $1 AND rating_id = $2")
-    Mono<Rating> findRatingById(int lectureId, int ratingId);
+//    @Query("SELECT r.rating_id, r.user_id, r.rating, r.comment, r.created_at, r.updated_at FROM RATING r WHERE r.lecture_id = :lectureId AND r.rating_id = :ratingId")
+//    Mono<Rating> findRatingById(Long lectureId, Long ratingId);
 }

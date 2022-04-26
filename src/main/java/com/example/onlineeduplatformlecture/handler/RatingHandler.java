@@ -3,6 +3,7 @@ package com.example.onlineeduplatformlecture.handler;
 import com.example.onlineeduplatformlecture.model.Rating;
 import com.example.onlineeduplatformlecture.repository.RatingRepository;
 import com.example.onlineeduplatformlecture.service.RatingService;
+import java.util.HashMap;
 import java.util.Map;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -26,40 +27,21 @@ public class RatingHandler {
     }
 
     public Mono<ServerResponse> getRatingList(ServerRequest request) {
-        Mono<ServerResponse> notFound = ServerResponse.notFound().build();
 
-        int lectureId = Integer.parseInt(request.pathVariable("lectureId"));
-
-        Flux<Rating> ratings = this.ratingRepository.findAll();
-
+        Flux<Rating> articles = this.ratingRepository.findAll();
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-                .body(ratings, Rating.class);
-
-//        return Mono.just(ratingRepository.findById(lectureId))
-//                .flatMap(rating -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(Mono.just(rating), Rating.class).switchIfEmpty(notFound));
-
-//        return ServerResponse
-//                .ok()
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .body(ratingMono, Rating.class)
-//                .switchIfEmpty(notFound);
-
+                .body(articles, Rating.class);
     }
 
     public Mono<ServerResponse> getRating(ServerRequest request) {
+
+        Long ratingId = Long.parseLong(request.pathVariable("ratingId"));
         Mono<ServerResponse> notFound = ServerResponse.notFound().build();
-        int lectureId = Integer.parseInt(request.pathVariable("lectureId"));
-        int ratingId = Integer.parseInt(request.pathVariable("ratingId"));
-
-        Mono<Rating> ratingMono = ratingRepository
-                .findRatingById(lectureId, ratingId)
-                .log();
-
-        return ServerResponse
-                .ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(ratingMono, Rating.class)
+        Mono<Rating> ratingMono = this.ratingRepository.findById(ratingId);
+        return ratingMono
+                .flatMap(rating -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(Mono.just(rating), Rating.class))
                 .switchIfEmpty(notFound);
+
     }
 
     public Mono<ServerResponse> saveRating(ServerRequest request) {
