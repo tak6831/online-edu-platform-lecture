@@ -3,6 +3,7 @@ package com.example.onlineeduplatformlecture.handler;
 import com.example.onlineeduplatformlecture.model.Content;
 import com.example.onlineeduplatformlecture.model.Lecture;
 import com.example.onlineeduplatformlecture.model.Rating;
+import com.example.onlineeduplatformlecture.repository.RatingRepository;
 import com.example.onlineeduplatformlecture.service.ContentService;
 import com.example.onlineeduplatformlecture.service.EnrolmentService;
 import com.example.onlineeduplatformlecture.service.LectureService;
@@ -21,15 +22,20 @@ import java.util.Optional;
 import static org.springframework.web.reactive.function.server.EntityResponse.fromObject;
 
 @Component
-@RequiredArgsConstructor
 public class LectureHandler {
-
-    @Autowired
-    RatingService ratingService;
 
     private final LectureService lectureService;
     private final EnrolmentService enrolmentService;
     private final ContentService contentService;
+
+    public LectureHandler(
+            LectureService lectureService,
+            EnrolmentService enrolmentService,
+            ContentService contentService) {
+        this.lectureService = lectureService;
+        this.enrolmentService = enrolmentService;
+        this.contentService = contentService;
+    }
 
     public Mono<ServerResponse> getLectureList(ServerRequest serverRequest){
         Flux<Lecture> lectureList = lectureService.getLectureList();

@@ -2,7 +2,7 @@ package com.example.onlineeduplatformlecture.model;
 
 import lombok.Data;
 
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
 
 @Data
 public class Content {
