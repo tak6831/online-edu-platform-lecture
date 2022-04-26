@@ -3,8 +3,6 @@ package com.example.onlineeduplatformlecture.handler;
 import com.example.onlineeduplatformlecture.model.Rating;
 import com.example.onlineeduplatformlecture.repository.RatingRepository;
 import com.example.onlineeduplatformlecture.service.RatingService;
-import java.util.HashMap;
-import java.util.Map;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
