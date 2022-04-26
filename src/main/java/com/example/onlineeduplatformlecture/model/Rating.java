@@ -8,14 +8,6 @@ public class Rating {
     private final float rating;
     private final String comment;
 
-    public Rating(int ratingId, int lectureId, int userId, float rating, String comment) {
-        this.ratingId = ratingId;
-        this.lectureId = lectureId;
-        this.userId = userId;
-        this.rating = rating;
-        this.comment = comment;
-    }
-
     public int getRatingId() {
         return ratingId;
     }
@@ -36,4 +28,22 @@ public class Rating {
         return comment;
     }
 
+    public Rating(int ratingId, int lectureId, int userId, float rating, String comment) {
+        this.ratingId = ratingId;
+        this.lectureId = lectureId;
+        this.userId = userId;
+        this.rating = rating;
+        this.comment = comment;
+    }
+
+    @Override
+    public String toString() {
+        return "Rating{" +
+                "ratingId=" + ratingId +
+                ", lectureId=" + lectureId +
+                ", userId=" + userId +
+                ", rating=" + rating +
+                ", comment='" + comment + '\'' +
+                '}';
+    }
 }
