@@ -3,16 +3,13 @@ package com.example.onlineeduplatformlecture.handler;
 import com.example.onlineeduplatformlecture.model.Content;
 import com.example.onlineeduplatformlecture.model.Enrolment;
 import com.example.onlineeduplatformlecture.model.Lecture;
-import com.example.onlineeduplatformlecture.model.Rating;
 import com.example.onlineeduplatformlecture.model.Score;
-import com.example.onlineeduplatformlecture.repository.RatingRepository;
 import com.example.onlineeduplatformlecture.repository.ScoreRepository;
 import com.example.onlineeduplatformlecture.repository.EnrolmentRepository;
 import com.example.onlineeduplatformlecture.service.ContentService;
 import com.example.onlineeduplatformlecture.service.EnrolmentService;
 import com.example.onlineeduplatformlecture.service.LectureService;
 import com.example.onlineeduplatformlecture.service.ScoreService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -34,11 +31,13 @@ public class LectureHandler {
             LectureService lectureService,
             EnrolmentService enrolmentService,
             ContentService contentService,
-            ScoreService scoreService) {
+            ScoreService scoreService,
+            EnrolmentRepository enrolmentRepository) {
         this.lectureService = lectureService;
         this.enrolmentService = enrolmentService;
         this.contentService = contentService;
         this.scoreService = scoreService;
+        this.enrolmentRepository = enrolmentRepository;
     }
 
     @Autowired
