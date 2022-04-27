@@ -1,10 +1,11 @@
-package com.example.onlineeduplatformlecture.service;
+package com.example.onlineeduplatformlecture.service.impl;
 
 import com.example.onlineeduplatformlecture.dto.RatingAverageDto;
 import com.example.onlineeduplatformlecture.dto.RatingDto;
 import com.example.onlineeduplatformlecture.dto.RatingSaveDto;
 import com.example.onlineeduplatformlecture.model.Rating;
 import com.example.onlineeduplatformlecture.repository.RatingRepository;
+import com.example.onlineeduplatformlecture.service.RatingService;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;

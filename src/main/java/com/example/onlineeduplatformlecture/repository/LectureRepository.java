@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface LectureRepository extends ReactiveCrudRepository<Lecture, Long> {
-//    Mono<Lecture> findByLectureId(int lectuerId);
+    Mono<Lecture> findByLectureId(int lectuerId);
 
     @Query("UPDATE LECTURE SET LECTURE.exposed_yn = $2 WHERE LECTURE.lecture_id")
     Mono<Lecture> updateExpose(long lectureId,int exposedYn);
