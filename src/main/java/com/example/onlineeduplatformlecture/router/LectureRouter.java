@@ -24,8 +24,10 @@ public class LectureRouter {
 
 //
 //                //Enrolment & Matching
+
                 .POST("/lectures/{lectureId}/enrolment", lectureHandler::enrollLecture)
                 .POST("/lectures/{lectureId}/matching", lectureHandler::matchTeacher)
+
 //
 //                // Content
                 .GET("/lectures/{lectureId}/contents", lectureHandler::getContentList)
