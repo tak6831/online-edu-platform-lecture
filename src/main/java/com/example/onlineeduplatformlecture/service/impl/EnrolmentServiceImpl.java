@@ -18,11 +18,8 @@ public class EnrolmentServiceImpl implements EnrolmentService {
     }
 
     // POST /lectures/{lectureId}/enrolment (수강 신청)
-    public Mono<Enrolment> enrolmentLectuer(int lectureId){
-
-        int enrolmentId = Integer.parseInt(String.valueOf(UUID.randomUUID()));
+    public Mono<Enrolment> enrolmentLectuer(Enrolment enrolment){
         // user ID를 받아오는 곳이 있어야 할 듯,,
-        Enrolment enrolment = new Enrolment(lectureId, enrolmentId, 1234);
         return enrolmentRepository.save(enrolment);
     }
 }

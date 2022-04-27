@@ -21,8 +21,9 @@ VALUES
 
 DROP TABLE IF EXISTS ENROLLMENT;
 
+
 CREATE TABLE IF NOT EXISTS ENROLLMENT (
-    enrollment_id   int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    enrolment_id    int AUTO_INCREMENT PRIMARY KEY NOT NULL,
     lecture_id      int not null,
     user_id         int not null,
     created_at      TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
@@ -54,10 +55,17 @@ CREATE TABLE IF NOT EXISTS SCORE (
 DROP TABLE IF EXISTS CONTENT;
 
 CREATE TABLE IF NOT EXISTS CONTENT (
-    content_id  int AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    lecture_id  int not null,
-    content     VARCHAR(100) not null,
-    exam_yn     int DEFAULT 0,
+
+    content_id int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    lecture_id int not null,
+    content VARCHAR(100) not null,
+    exam_yn boolean not null,
     created_at  TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
     updated_at  TIMESTAMP  DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
     );
+
+INSERT INTO CONTENT
+VALUES
+    (1, 1, 'test Conetent', '0', '2022-04-25 13:32:50', '2022-04-25 13:32:50'),
+    (2, 1, 'test Conetent2', '1', '2022-04-25 14:32:50', '2022-04-25 13:32:50');
+

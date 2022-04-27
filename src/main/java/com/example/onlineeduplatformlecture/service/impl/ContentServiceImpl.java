@@ -17,12 +17,12 @@ public class ContentServiceImpl implements ContentService {
     }
 
     // GET /lectures/{lectureId}/contents (콘텐츠 리스트 조회)
-    public Flux<Content> getContentList(int  lectureId){
-        return contentRepository.findContentByLectureId(lectureId);
+    public Flux<Content> getContentList(long  lectureId){
+        return contentRepository.findByLectureId(lectureId);
     }
 
     // GET /lectures/{lectureId}/contents/{contentId} (콘텐츠 열람)
-    public Mono<Content> getContent(int lectureId, int contentId){
+    public Mono<Content> getContent(long lectureId, long contentId){
         return contentRepository.findByLectureIdAndContentId(lectureId, contentId);
     }
 
