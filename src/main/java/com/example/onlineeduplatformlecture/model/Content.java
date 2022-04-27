@@ -1,53 +1,34 @@
 package com.example.onlineeduplatformlecture.model;
 
-import lombok.Data;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-@Data
-@Table(value = "CONTENT")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 public class Content {
 
     @Id
-    @Column(value = "content_id")
-    private final int contentId;
+    private Long contentId;
+    private Long lectureId;
+    private String content;
+    private Long examYn;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
-    @Column(value = "lecture_id")
-    private final int lectureId;
-    @Column(value = "cotent")
-    private final String content;
-    private final boolean examYn;
-
-    @CreatedDate
-    LocalDateTime createdAt;
-
-    @LastModifiedDate
-    LocalDateTime updatedAt;
-    public Content(int contentId, int lectureId, String content, boolean examYn) {
-        this.contentId = contentId;
+    public Content(Long lectureId, String content, Long examYn) {
         this.lectureId = lectureId;
         this.content = content;
         this.examYn = examYn;
     }
 
-    public int getContentId() {
-        return contentId;
-    }
-
-    public int getLectureId() {
-        return lectureId;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public boolean isExamYn() {
-        return examYn;
-    }
 }

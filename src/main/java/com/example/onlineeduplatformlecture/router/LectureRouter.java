@@ -19,16 +19,16 @@ public class LectureRouter {
                 // Lecture
                 .GET("/lectures", lectureHandler::getLectureList)
                 .GET("/lectures/{lectureId}", lectureHandler::getLecture)
-//                .POST("/lectures", lectureHandler::createLecture)
-//                .PATCH("/lectures/{lectureId}", lectureHandler::changeExposeLecture)
+                .POST("/lectures", lectureHandler::createLecture)
+//              .PATCH("/lectures/{lectureId}", lectureHandler::changeExposeLecture)
 //
 //                //Enrolment & Matching
 //                .POST("/lectures/{lectureId}/enrolment", lectureHandler::enrollLecture)
-//                .PATCH("/lectures/{lectureId}/matching", lectureHandler::matchTeacher)
+                .POST("/lectures/{lectureId}/matching", lectureHandler::matchTeacher)
 //
 //                // Content
                 .GET("/lectures/{lectureId}/contents", lectureHandler::getContentList)
-//                .POST("/lectures/{lectureId}/contents", lectureHandler::uploadContent)
+                .POST("/lectures/{lectureId}/contents", lectureHandler::uploadContent)
                 .GET("/lectures/{lectureId}/contents/{contentId}", lectureHandler::getContent)
 //
 //                // Score
