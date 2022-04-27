@@ -18,14 +18,23 @@ import java.time.LocalDateTime;
 public class Content {
 
     @Id
-    private Long contentId;
-    private Long lectureId;
-    private String content;
-    private Long examYn;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+    @Column(value = "content_id")
+    private  int contentId;
 
-    public Content(Long lectureId, String content, Long examYn) {
+    @Column(value = "lecture_id")
+    private  int lectureId;
+    @Column(value = "content")
+    private  String content;
+    @Column(value = "exam_yn")
+    private  boolean examYn;
+
+    @CreatedDate
+    LocalDateTime createdAt;
+
+    @LastModifiedDate
+    LocalDateTime updatedAt;
+    public Content(int contentId, int lectureId, String content, boolean examYn) {
+        this.contentId = contentId;
         this.lectureId = lectureId;
         this.content = content;
         this.examYn = examYn;
