@@ -3,12 +3,12 @@
 DROP TABLE IF EXISTS LECTURE;
 
 CREATE TABLE IF NOT EXISTS LECTURE (
-    lecture_id INT(20) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    title VARCHAR(45) not null,
-    location VARCHAR(45) not null,
-    exposed_yn INT(1) not null,
-    created_at TIMESTAMP not null,
-    updated_at TIMESTAMP not null
+    lecture_id  int         AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    title       VARCHAR(45) not null,
+    location    VARCHAR(45) not null,
+    exposed_yn  int         DEFAULT 0,
+    created_at  TIMESTAMP   DEFAULT CURRENT_TIMESTAMP,
+    updated_at  TIMESTAMP   DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
     );
 
 INSERT INTO LECTURE
@@ -22,42 +22,42 @@ VALUES
 DROP TABLE IF EXISTS ENROLLMENT;
 
 CREATE TABLE IF NOT EXISTS ENROLLMENT (
-    enrollment_id INT(20) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    lecture_id INT(20) not null,
-    user_id INT(20) not null,
-    created_at TIMESTAMP not null,
-    updated_at TIMESTAMP not null
+    enrollment_id   int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    lecture_id      int not null,
+    user_id         int not null,
+    created_at      TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
+    updated_at      TIMESTAMP  DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
     );
 
 DROP TABLE IF EXISTS MATCHING;
 
 CREATE TABLE IF NOT EXISTS MATCHING (
-    matching_id INT(20) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    lecture_id INT(20) not null,
-    user_id INT(20) not null,
-    created_at TIMESTAMP not null,
-    updated_at TIMESTAMP not null
+    matching_id int         AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    lecture_id  int         not null,
+    user_id     int         not null,
+    created_at  TIMESTAMP   DEFAULT CURRENT_TIMESTAMP,
+    updated_at  TIMESTAMP   DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
     );
 
 DROP TABLE IF EXISTS SCORE;
 
 CREATE TABLE IF NOT EXISTS SCORE (
-    score_id INT(20) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    lecture_id INT(20) not null,
-    user_id INT(20) not null,
-    score VARCHAR(45) not null,
-    comment VARCHAR(200) not null,
-    created_at TIMESTAMP not null,
-    updated_at TIMESTAMP not null
+    score_id    int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    lecture_id  int not null,
+    user_id     int not null,
+    score       VARCHAR(45) not null,
+    comment     VARCHAR(200) not null,
+    created_at  TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
+    updated_at  TIMESTAMP  DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
     );
 
 DROP TABLE IF EXISTS CONTENT;
 
 CREATE TABLE IF NOT EXISTS CONTENT (
-    content_id INT(20) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    lecture_id INT(20) not null,
-    content VARCHAR(100) not null,
-    exam_yn INT(1) not null,
-    created_at TIMESTAMP not null,
-    updated_at TIMESTAMP not null
+    content_id  int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    lecture_id  int not null,
+    content     VARCHAR(100) not null,
+    exam_yn     int DEFAULT 0,
+    created_at  TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
+    updated_at  TIMESTAMP  DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
     );
