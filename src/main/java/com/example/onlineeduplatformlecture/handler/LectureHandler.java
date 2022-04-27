@@ -4,10 +4,16 @@ import com.example.onlineeduplatformlecture.model.Content;
 import com.example.onlineeduplatformlecture.model.Enrolment;
 import com.example.onlineeduplatformlecture.model.Lecture;
 import com.example.onlineeduplatformlecture.model.Rating;
+import com.example.onlineeduplatformlecture.model.Score;
+import com.example.onlineeduplatformlecture.repository.RatingRepository;
+import com.example.onlineeduplatformlecture.repository.ScoreRepository;
 import com.example.onlineeduplatformlecture.repository.EnrolmentRepository;
 import com.example.onlineeduplatformlecture.service.ContentService;
 import com.example.onlineeduplatformlecture.service.EnrolmentService;
 import com.example.onlineeduplatformlecture.service.LectureService;
+import com.example.onlineeduplatformlecture.service.ScoreService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -21,18 +27,22 @@ public class LectureHandler {
     private final LectureService lectureService;
     private final EnrolmentService enrolmentService;
     private final ContentService contentService;
+    private final ScoreService scoreService;
     private final EnrolmentRepository enrolmentRepository;
-
+  
     public LectureHandler(
             LectureService lectureService,
             EnrolmentService enrolmentService,
-            ContentService contentService, EnrolmentRepository enrolmentRepository) {
+            ContentService contentService,
+            ScoreService scoreService) {
         this.lectureService = lectureService;
         this.enrolmentService = enrolmentService;
         this.contentService = contentService;
-        this.enrolmentRepository = enrolmentRepository;
+        this.scoreService = scoreService;
     }
 
+    @Autowired
+    ScoreRepository scoreRepository;
     public Mono<ServerResponse> getLectureList(ServerRequest serverRequest){
         Flux<Lecture> lectureList = lectureService.getLectureList();
         return ServerResponse.ok()
@@ -95,6 +105,38 @@ public class LectureHandler {
                 .body(contentMono, Content.class)
                 .onErrorResume(e -> ServerResponse.badRequest().bodyValue("데이터 오류"));
 
+    }
+
+    public Mono<ServerResponse> getScore(ServerRequest serverRequest) {
+        int lectureId = Integer.parseInt(serverRequest.pathVariable("lectureId"));
+        Mono<Score> scoreMono = scoreRepository.findScoreById(lectureId,1);
+        Mono<ServerResponse> notFound = ServerResponse.notFound().build();
+        scoreMono.subscribe(System.out::println);
+        return scoreMono
+                .flatMap(score -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(scoreMono, Score.class))
+                .switchIfEmpty(notFound);
+    }
+
+    public Mono<ServerResponse> setScore(ServerRequest serverRequest) {
+        Mono<Score> scoreMono = serverRequest.bodyToMono(Score.class)
+                .onErrorResume(throwable -> {
+                    System.out.println(throwable.getMessage());
+                    return Mono.error(new RuntimeException(throwable));
+        });
+
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(
+                scoreMono.flatMap(this.scoreRepository::save), Score.class);
+    }
+
+    public Mono<ServerResponse> changeExposeLecture(ServerRequest serverRequest) {
+//        Lecture paramLecture = serverRequest.bodyToMono(Lecture.class).block();
+//        Lecture lecture = lectureRepository.getById((long) paramLecture.getLectureId());
+//        lecture.setExposedYn(1);
+//        lectureRepository.saveAndFlush(lecture);
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(new Lecture(), Lecture.class)
+                .onErrorResume(e -> ServerResponse.badRequest().bodyValue("데이터 오류"));
     }
 //
 //    Mono<ServerResponse> getScore(ServerRequest serverRequest);
