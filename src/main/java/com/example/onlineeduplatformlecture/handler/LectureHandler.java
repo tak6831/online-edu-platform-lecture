@@ -4,6 +4,7 @@ import com.example.onlineeduplatformlecture.model.Content;
 import com.example.onlineeduplatformlecture.model.Lecture;
 import com.example.onlineeduplatformlecture.model.Rating;
 import com.example.onlineeduplatformlecture.model.Score;
+import com.example.onlineeduplatformlecture.repository.LectureRepository;
 import com.example.onlineeduplatformlecture.repository.RatingRepository;
 import com.example.onlineeduplatformlecture.repository.ScoreRepository;
 import com.example.onlineeduplatformlecture.service.*;
@@ -16,6 +17,8 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Optional;
 
 import static org.springframework.web.reactive.function.server.EntityResponse.fromObject;
@@ -41,6 +44,8 @@ public class LectureHandler {
 
     @Autowired
     ScoreRepository scoreRepository;
+    @Autowired
+    LectureRepository lectureRepository;
     public Mono<ServerResponse> getLectureList(ServerRequest serverRequest){
         Flux<Lecture> lectureList = lectureService.getLectureList();
         return ServerResponse.ok()
@@ -55,11 +60,11 @@ public class LectureHandler {
             return ServerResponse.badRequest().build();
         }
         int lectureId = Integer.parseInt(queryString.get());
-        Mono<Lecture> lectureMono = lectureService.getLecture(lectureId);
+//        Mono<Lecture> lectureMono = lectureService.getLecture(lectureId);
 
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(lectureMono, Lecture.class);
+                .body(null, Lecture.class);
     }
 
 //    Mono<ServerResponse> createLecture(ServerRequest serverRequest);
@@ -102,12 +107,17 @@ public class LectureHandler {
 
     public Mono<ServerResponse> getScore(ServerRequest serverRequest) {
         int lectureId = Integer.parseInt(serverRequest.pathVariable("lectureId"));
-        Mono<Score> scoreMono = scoreRepository.findScoreById(lectureId,1);
-        Mono<ServerResponse> notFound = ServerResponse.notFound().build();
-        scoreMono.subscribe(System.out::println);
-        return scoreMono
-                .flatMap(score -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(scoreMono, Score.class))
-                .switchIfEmpty(notFound);
+        Flux<Score> Scores = scoreRepository.findAll()
+                .filter(score -> score.getLectureId()==lectureId);
+
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
+                .body(Scores, Rating.class);
+//        Mono<Score> scoreMono = scoreRepository.findScoreById(lectureId,1);
+//        Mono<ServerResponse> notFound = ServerResponse.notFound().build();
+//        scoreMono.subscribe(System.out::println);
+//        return scoreMono
+//                .flatMap(score -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(scoreMono, Score.class))
+//                .switchIfEmpty(notFound);
     }
 
     public Mono<ServerResponse> setScore(ServerRequest serverRequest) {
@@ -122,29 +132,13 @@ public class LectureHandler {
     }
 
     public Mono<ServerResponse> changeExposeLecture(ServerRequest serverRequest) {
-//        Lecture paramLecture = serverRequest.bodyToMono(Lecture.class).block();
-//        Lecture lecture = lectureRepository.getById((long) paramLecture.getLectureId());
-//        lecture.setExposedYn(1);
-//        lectureRepository.saveAndFlush(lecture);
-        return ServerResponse.ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(new Lecture(), Lecture.class)
-                .onErrorResume(e -> ServerResponse.badRequest().bodyValue("데이터 오류"));
-    }
-//
-//    Mono<ServerResponse> getScore(ServerRequest serverRequest);
-//    Mono<ServerResponse> setScore(ServerRequest serverRequest);
+        int lectureId = Integer.parseInt(serverRequest.pathVariable("lectureId"));
+        Mono<Lecture> lectureMono = lectureRepository.findById((long) lectureId)
+                .flatMap(x -> Mono.just(new Lecture(x.getLectureId(),x.getTitle(),x.getLocation(),1, LocalDateTime.now(),LocalDateTime.now())));
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(
+                lectureMono.flatMap(lectureRepository::save),Lecture.class);
 
-//    public Mono<ServerResponse> getRatingList(ServerRequest serverRequest){
-//        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(fromObject(ratingService.getRatingList()));
-//    };
-//
-//    public Mono<ServerResponse> getRating(ServerRequest serverRequest){
-//        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(ratingService.getRating());
-//    };
-//    public Mono<ServerResponse> setRating(ServerRequest serverRequest){
-//        Rating rating = serverRequest.bodyToMono(Rating.class).block();
-//        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(ratingService.saveRating(rating));
-//    };
+
+    }
 
 }
