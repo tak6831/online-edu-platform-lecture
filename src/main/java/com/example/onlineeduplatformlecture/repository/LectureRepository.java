@@ -8,6 +8,6 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface LectureRepository extends ReactiveCrudRepository<Lecture, Long> {
-    Mono<Lecture> findByLectureId(int lectuerId);
+    Mono<Lecture> findByLectureId(Long lectuerId);
 
 }

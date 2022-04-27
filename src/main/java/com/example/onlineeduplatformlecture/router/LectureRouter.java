@@ -23,7 +23,7 @@ public class LectureRouter {
                 .PATCH("/lectures/{lectureId}", lectureHandler::changeExposeLecture)
 //
 //                //Enrolment & Matching
-//                .POST("/lectures/{lectureId}/enrolment", lectureHandler::enrollLecture)
+                .POST("/lectures/{lectureId}/enrolment", lectureHandler::enrollLecture)
 //                .PATCH("/lectures/{lectureId}/matching", lectureHandler::matchTeacher)
 //
 //                // Content
