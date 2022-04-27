@@ -1,9 +1,13 @@
 package com.example.onlineeduplatformlecture.service;
 
+import com.example.onlineeduplatformlecture.dto.RatingAverageDto;
+import com.example.onlineeduplatformlecture.dto.RatingDto;
+import com.example.onlineeduplatformlecture.dto.RatingSaveDto;
 import com.example.onlineeduplatformlecture.model.Rating;
 import com.example.onlineeduplatformlecture.repository.RatingRepository;
-import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -16,16 +20,30 @@ public class RatingServiceImpl implements RatingService {
     }
 
     @Override
-    public double getAverageRate(List<Rating> ratingList) {
-        return 0;
-//        return ratingList.stream()
-//                .mapToDouble(Rating::getRating)
-//                .average()
-//                .orElse(0);
+    public Mono<RatingAverageDto> getAverageRate(Flux<RatingDto> ratings) {
+        return ratings.collect(Collectors.averagingDouble(RatingDto::getRating))
+                .map(RatingAverageDto::new);
     }
 
     @Override
-    public Mono<Rating> saveRate(Rating rating) {
-        return ratingRepository.save(rating);
+    public Flux<RatingDto> getRatings(Long lectureId) {
+        return ratingRepository.findByLectureId(lectureId)
+                .map(r -> new RatingDto(r.getRatingId(), r.getUserId(), r.getRating(), r.getComment()));
+    }
+
+    @Override
+    public Mono<RatingDto> getRating(Long ratingId) {
+        return ratingRepository.findById(ratingId)
+                .map(r -> new RatingDto(r.getRatingId(), r.getUserId(), r.getRating(), r.getComment()));
+    }
+
+    @Override
+    public Mono<Rating> getRatingByUserIdAndLectureId(Long userId, Long lectureId) {
+        return ratingRepository.findByUserIdAndLectureId(userId, lectureId);
+    }
+
+    @Override
+    public Mono<RatingSaveDto> saveRate(Rating rating) {
+        return ratingRepository.save(rating).map(r -> new RatingSaveDto(r.getRatingId()));
     }
 }
