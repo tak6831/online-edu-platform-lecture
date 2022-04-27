@@ -21,12 +21,12 @@ VALUES
 
 DROP TABLE IF EXISTS ENROLLMENT;
 
-CREATE TABLE IF NOT EXISTS ENROLLMENT (
-    enrollment_id INT(20) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+CREATE TABLE IF NOT EXISTS ENROLMENT (
+    enrolment_id INT(20) AUTO_INCREMENT PRIMARY KEY NOT NULL,
     lecture_id INT(20) not null,
     user_id INT(20) not null,
-    created_at TIMESTAMP not null,
-    updated_at TIMESTAMP not null
+    created_at  TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
+    updated_at  TIMESTAMP  DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
     );
 
 DROP TABLE IF EXISTS MATCHING;
@@ -57,7 +57,12 @@ CREATE TABLE IF NOT EXISTS CONTENT (
     content_id INT(20) AUTO_INCREMENT PRIMARY KEY NOT NULL,
     lecture_id INT(20) not null,
     content VARCHAR(100) not null,
-    exam_yn INT(1) not null,
+    exam_yn boolean not null,
     created_at TIMESTAMP not null,
     updated_at TIMESTAMP not null
     );
+
+INSERT INTO CONTENT
+VALUES
+    (1, 1, 'test Conetent', '0', '2022-04-25 13:32:50', '2022-04-25 13:32:50'),
+    (2, 1, 'test Conetent2', '1', '2022-04-25 14:32:50', '2022-04-25 13:32:50');

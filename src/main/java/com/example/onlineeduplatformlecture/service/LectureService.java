@@ -12,7 +12,7 @@ public interface LectureService {
     Flux<Lecture> getLectureList();
 
     // GET /lectures/{lectureId} (강의 열람)
-    Mono<Lecture> getLecture(int lectureId);
+    Mono<Lecture> getLecture(Long lectureId);
 
 
 }

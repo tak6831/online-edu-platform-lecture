@@ -9,8 +9,10 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface ContentRepository extends ReactiveCrudRepository<Content, Long> {
+/*
+    Flux<Content> findContentByLectureId(long lectuerId);
+    Mono<Content> findByLectureIdAndContentId(long lectuerId, long contentId);*/
 
-    Flux<Content> findContentByLectureId(int lectuerId);
-    Mono<Content> findByLectureIdAndContentId(int lectuerId, int contentId);
-
+    Flux<Content> findByLectureId(long lectureId);
+    Mono<Content> findByLectureIdAndContentId(long lectuerId, long contentId);
 }
