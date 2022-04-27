@@ -25,11 +25,11 @@ public class Lecture {
 
     private String location;
 
-    private Long exposedYn;
+    private int exposedYn;
 
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
 
-    private Timestamp updatedAt;
+    private LocalDateTime updatedAt;
 
     public Lecture(String title, String location) {
         this.title = title;

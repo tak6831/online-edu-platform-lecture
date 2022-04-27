@@ -1,6 +1,7 @@
 package com.example.onlineeduplatformlecture.handler;
 
 import com.example.onlineeduplatformlecture.model.Content;
+import com.example.onlineeduplatformlecture.model.Enrolment;
 import com.example.onlineeduplatformlecture.model.Lecture;
 import com.example.onlineeduplatformlecture.model.Matching;
 import com.example.onlineeduplatformlecture.repository.ContentRepository;
@@ -9,9 +10,6 @@ import com.example.onlineeduplatformlecture.repository.MatchingRepository;
 import com.example.onlineeduplatformlecture.model.Rating;
 import com.example.onlineeduplatformlecture.model.Score;
 
-import lombok.RequiredArgsConstructor;
-import com.example.onlineeduplatformlecture.repository.LectureRepository;
-import com.example.onlineeduplatformlecture.repository.RatingRepository;
 import com.example.onlineeduplatformlecture.repository.ScoreRepository;
 import com.example.onlineeduplatformlecture.repository.EnrolmentRepository;
 import com.example.onlineeduplatformlecture.service.ContentService;
@@ -19,7 +17,6 @@ import com.example.onlineeduplatformlecture.service.EnrolmentService;
 import com.example.onlineeduplatformlecture.service.LectureService;
 import com.example.onlineeduplatformlecture.service.ScoreService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -28,10 +25,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Optional;
-
-import static org.springframework.web.reactive.function.server.EntityResponse.fromObject;
 
 @Component
 public class LectureHandler {
@@ -39,6 +33,8 @@ public class LectureHandler {
     private final LectureRepository lectureRepository;
     private final ContentRepository contentRepository;
     private final MatchingRepository matchingRepository;
+    private final EnrolmentRepository enrolmentRepository;
+    private final ScoreRepository scoreRepository;
     private final LectureService lectureService;
     private final EnrolmentService enrolmentService;
     private final ContentService contentService;
@@ -48,6 +44,7 @@ public class LectureHandler {
             ContentRepository contentRepository,
             MatchingRepository matchingRepository,
             EnrolmentRepository enrolmentRepository,
+            ScoreRepository scoreRepository,
             LectureService lectureService,
             EnrolmentService enrolmentService,
             ContentService contentService,
@@ -56,6 +53,7 @@ public class LectureHandler {
         this.contentRepository = contentRepository;
         this.matchingRepository = matchingRepository;
         this.enrolmentRepository = enrolmentRepository;
+        this.scoreRepository = scoreRepository;
         this.lectureService = lectureService;
         this.enrolmentService = enrolmentService;
         this.contentService = contentService;
@@ -63,16 +61,13 @@ public class LectureHandler {
 
     }
 
-    @Autowired
-    ScoreRepository scoreRepository;
-    @Autowired
-    LectureRepository lectureRepository;
     public Mono<ServerResponse> getLectureList(ServerRequest serverRequest){
         Flux<Lecture> lectureList = lectureService.getLectureList();
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(lectureList, Lecture.class);
     }
+
     public Mono<ServerResponse> getLecture(ServerRequest serverRequest) {
 
         Optional<String> queryString = serverRequest.queryParam("lectureId");
@@ -98,12 +93,18 @@ public class LectureHandler {
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(
                 lectureMono.flatMap(this.lectureRepository::save), Lecture.class);
     };
-//    Mono<ServerResponse> changeExposeLecture(ServerRequest serverRequest);
-//
-/*    public Mono<ServerResponse> enrollLecture(ServerRequest serverRequest){
 
-    }*/
-//
+    public Mono<ServerResponse> enrollLecture(ServerRequest serverRequest){
+        Mono<Enrolment> enrolmentMono = serverRequest.bodyToMono(Enrolment.class)
+                .onErrorResume(throwable -> {
+                    System.out.println(throwable.getMessage());
+                    return Mono.error(new RuntimeException(throwable));
+                });
+
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(
+                enrolmentMono.flatMap(this.enrolmentRepository::save), Enrolment.class);
+    }
+
     public Mono<ServerResponse> matchTeacher(ServerRequest request){
         Mono<Matching> lectureMono = request.bodyToMono(Matching.class)
                 .onErrorResume(throwable -> {
@@ -114,20 +115,17 @@ public class LectureHandler {
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(
                 lectureMono.flatMap(this.matchingRepository::save), Matching.class);
     };
-//
+
     public Mono<ServerResponse> getContentList(ServerRequest serverRequest){
 
-        Optional<String> queryString = serverRequest.queryParam("lectureId");
-
-        if(!queryString.isPresent()){
-            return ServerResponse.badRequest().build();
-        }
-        int lectureId = Integer.parseInt(queryString.get());
+        Long lectureId  = Long.parseLong(serverRequest.pathVariable("lectureId"));
+        Mono<ServerResponse> notFound = ServerResponse.notFound().build();
         Flux<Content> contentFlux = contentService.getContentList(lectureId);
 
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(contentFlux, Content.class);
+                .body(contentFlux, Content.class)
+                .switchIfEmpty(notFound);
     }
 
     public Mono<ServerResponse> uploadContent(ServerRequest request){
@@ -143,8 +141,8 @@ public class LectureHandler {
 
     public Mono<ServerResponse> getContent(ServerRequest serverRequest){
 
-        int lectureId = Integer.parseInt(serverRequest.queryParam("lectureId").get());
-        int contentId = Integer.parseInt(serverRequest.queryParam("contentId").get());
+        Long lectureId  = Long.parseLong(serverRequest.pathVariable("lectureId"));
+        Long contentId  = Long.parseLong(serverRequest.pathVariable("contentId"));
 
         Mono<Content> contentMono = contentService.getContent(lectureId,contentId);
 
@@ -187,8 +185,6 @@ public class LectureHandler {
                 .flatMap(x -> Mono.just(new Lecture(x.getLectureId(),x.getTitle(),x.getLocation(),1, LocalDateTime.now(),LocalDateTime.now())));
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(
                 lectureMono.flatMap(lectureRepository::save),Lecture.class);
-
-
     }
 
 }
