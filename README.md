@@ -5,7 +5,7 @@
 
 
 - Producer
-  - [Config 파일](https://github.com/radic2510/online-edu-platform-lecture/blob/main/src/main/java/com/example/onlineeduplatformlecture/config/KafkaProducerConfig.java)
+  - [Config](https://github.com/radic2510/online-edu-platform-lecture/blob/main/src/main/java/com/example/onlineeduplatformlecture/config/KafkaProducerConfig.java)
   - [Service](https://github.com/radic2510/online-edu-platform-lecture/blob/main/src/main/java/com/example/onlineeduplatformlecture/service/impl/RatingServiceImpl.java#L63)
   ```java
   // 별점 등록 시 Rating 정보 JSON 형태로 kafka 토픽에 등록
@@ -16,7 +16,7 @@
   ```
 
 - Consumer
-  - [Config 파일 링크](https://github.com/radic2510/online-edu-platform-lecture/blob/main/src/main/java/com/example/onlineeduplatformlecture/config/KafkaConsumerConfig.java)
+  - [Config](https://github.com/radic2510/online-edu-platform-lecture/blob/main/src/main/java/com/example/onlineeduplatformlecture/config/KafkaConsumerConfig.java)
   - [Service](https://github.com/radic2510/online-edu-platform-lecture/blob/main/src/main/java/com/example/onlineeduplatformlecture/service/impl/RatingServiceImpl.java#L69)
   ```java
   // 토픽 등록된 정보를 가져와서 해당 정보를 출력
