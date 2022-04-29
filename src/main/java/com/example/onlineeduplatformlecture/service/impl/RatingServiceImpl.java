@@ -66,8 +66,8 @@ public class RatingServiceImpl implements RatingService {
     }
 
 
-    @KafkaListener(topics = TOPIC, groupId = "rating", containerFactory = "greetingKafkaListenerContainerFactory")
-    public void consume(Rating rating) {
-        System.out.printf("Consumed message : %s%n", rating.getRatingId());
-    }
+//    @KafkaListener(topics = TOPIC, groupId = "rating", containerFactory = "greetingKafkaListenerContainerFactory")
+//    public void consume(Rating rating) {
+//        System.out.printf("Consumed message : %s%n", rating.getRatingId());
+//    }
 }

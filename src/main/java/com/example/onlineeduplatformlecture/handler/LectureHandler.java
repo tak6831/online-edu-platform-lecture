@@ -20,7 +20,6 @@ import java.time.LocalDateTime;
 public class LectureHandler {
 
     private final LectureRepository lectureRepository;
-
     private final MatchingRepository matchingRepository;
     private final EnrolmentRepository enrolmentRepository;
     private final LectureService lectureService;
