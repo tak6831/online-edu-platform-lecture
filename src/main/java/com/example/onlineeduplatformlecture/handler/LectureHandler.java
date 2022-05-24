@@ -28,13 +28,13 @@ public class LectureHandler {
     public LectureHandler(
             LectureRepository lectureRepository,
             MatchingRepository matchingRepository,
-//            EnrolmentRepository enrolmentRepository,
+            EnrolmentRepository enrolmentRepository,
             LectureService lectureService,
             EnrolmentService enrolmentService
     ) {
         this.lectureRepository = lectureRepository;
         this.matchingRepository = matchingRepository;
-//        this.enrolmentRepository = enrolmentRepository;
+        this.enrolmentRepository = enrolmentRepository;
         this.lectureService = lectureService;
         this.enrolmentService = enrolmentService;
 
