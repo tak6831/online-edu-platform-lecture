@@ -1,27 +1,34 @@
 package com.example.onlineeduplatformlecture.model;
 
+import lombok.*;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
+import java.sql.Timestamp;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 public class Enrolment {
 
-    private final int enrolmentId;
-    private final int lectureId;
-    private final int userId;
+    @Id
+    private  int enrolment_id;
+    private  int lectureId;
 
-    public Enrolment(int enrolmentId, int lectureId, int userId) {
-        this.enrolmentId = enrolmentId;
+    private  int userId;
+
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
+
+    public Enrolment(int lectureId, int enrolmentId, int userId) {
         this.lectureId = lectureId;
+        this.enrolment_id = enrolmentId;
         this.userId = userId;
     }
-
-    public int getEnrolmentId() {
-        return enrolmentId;
-    }
-
-    public int getLectureId() {
-        return lectureId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
 }

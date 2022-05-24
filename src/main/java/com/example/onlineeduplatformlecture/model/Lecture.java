@@ -1,64 +1,38 @@
 package com.example.onlineeduplatformlecture.model;
 
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
-@Entity
-@Table(name="LECTURE")
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 public class Lecture {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="LECTURE_ID ")
-    private int lectureId;
-    @Column(name="TITLE")
+    private Long lectureId;
+
     private String title;
-    @Column(name="LOCATION")
+
     private String location;
-    @Column(name="EXPOSED_YN")
-    private int exposedYn;
 
-    public Lecture() {
 
-    }
+    private Long exposedYn;
 
-    public int getLectureId() {
-        return lectureId;
-    }
+    private Timestamp createdAt;
 
-    public void setLectureId(int lectureId) {
-        this.lectureId = lectureId;
-    }
+    private Timestamp updatedAt;
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public int getExposedYn() {
-        return exposedYn;
-    }
-
-    public void setExposedYn(int exposedYn) {
-        this.exposedYn = exposedYn;
-    }
-
-    public Lecture(String title, String location) {
-        this.title = title;
-        this.location = location;
-        this.exposedYn = 0;
+    public Lecture(Long lectureId, String title, String location, long exposedYn, LocalDateTime now, LocalDateTime now1) {
     }
 
     @Override

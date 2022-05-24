@@ -1,49 +1,40 @@
 package com.example.onlineeduplatformlecture.model;
 
+
+import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 public class Rating {
 
-    private final int ratingId;
-    private final int lectureId;
-    private final int userId;
-    private final float rating;
-    private final String comment;
+    @Id
+    private Long ratingId;
+    private Long lectureId;
+    private Long userId;
+    private Double rating;
+    private String comment;
 
-    public int getRatingId() {
-        return ratingId;
-    }
+    @CreatedDate
+    private LocalDateTime createdAt;
 
-    public int getLectureId() {
-        return lectureId;
-    }
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public float getRating() {
-        return rating;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public Rating(int ratingId, int lectureId, int userId, float rating, String comment) {
-        this.ratingId = ratingId;
+    public Rating(Long lectureId, Long userId, Double rating, String comment) {
         this.lectureId = lectureId;
         this.userId = userId;
         this.rating = rating;
         this.comment = comment;
-    }
-
-    @Override
-    public String toString() {
-        return "Rating{" +
-                "ratingId=" + ratingId +
-                ", lectureId=" + lectureId +
-                ", userId=" + userId +
-                ", rating=" + rating +
-                ", comment='" + comment + '\'' +
-                '}';
     }
 }
