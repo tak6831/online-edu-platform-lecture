@@ -19,10 +19,10 @@ VALUES
 --(2, '이펙티브 자바', '서울특별시 강남구', '1'),
 --(3, '자바 알고리즘 코딩 테스트', '서울특별시 동작구', '1');
 
-DROP TABLE IF EXISTS ENROLLMENT;
+DROP TABLE IF EXISTS ENROLMENT;
 
 
-CREATE TABLE IF NOT EXISTS ENROLLMENT (
+CREATE TABLE IF NOT EXISTS ENROLMENT (
     enrolment_id    int AUTO_INCREMENT PRIMARY KEY NOT NULL,
     lecture_id      int not null,
     user_id         int not null,

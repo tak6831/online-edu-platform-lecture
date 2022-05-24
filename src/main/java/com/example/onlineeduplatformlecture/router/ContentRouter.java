@@ -1,6 +1,6 @@
 package com.example.onlineeduplatformlecture.router;
 
-
+import com.example.onlineeduplatformlecture.handler.ContentHandler;
 import com.example.onlineeduplatformlecture.handler.LectureHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,19 +11,15 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 @Configuration
 @EnableWebFlux
-public class LectureRouter {
+public class ContentRouter {
 
     @Bean
-    public RouterFunction<ServerResponse> lecturesRouter(LectureHandler lectureHandler) {
+    public RouterFunction<ServerResponse> contentRouters(ContentHandler contentHandler) {
         return RouterFunctions.route()
-                .GET("/lectures", lectureHandler::getLectureList)
-                .GET("/lectures/{lectureId}", lectureHandler::getLecture)
-                .POST("/lectures", lectureHandler::createLecture)
-                .PATCH("/lectures/{lectureId}", lectureHandler::changeExposeLecture)
-
-                //Enrolment & Matching
-                .POST("/lectures/{lectureId}/enrolment", lectureHandler::enrollLecture)
-                .POST("/lectures/{lectureId}/matching", lectureHandler::matchTeacher)
+//                // Content
+                .GET("/lectures/{lectureId}/contents", contentHandler::getContentList)
+                .POST("/lectures/{lectureId}/contents", contentHandler::uploadContent)
+                .GET("/lectures/{lectureId}/contents/{contentId}", contentHandler::getContent)
                 .build();
     }
 

@@ -12,14 +12,29 @@ spring:
   application:
     name: lecture-service
 
-#  r2dbc:
-#    url: r2dbc:h2:mem:///msa
-#    username: sa
-#    password:
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+#      group-id: lecture
+#      auto-offset-reset: earliest
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+    producer:
+      bootstrap-servers: localhost:9092
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+logging:
+  level:
+    root: INFO
+    org.springframework.r2dbc: DEBUG
+#debug: true
 
 server:
-#  port: 0
-  port: 8080
+  port: 0
+#  port: 8080
+
 eureka:
   instance:
     instance-id: ${spring.application.name}:${random.value}
@@ -29,8 +44,3 @@ eureka:
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
 
-logging:
-  level:
-    root: INFO
-    org.springframework.r2dbc: DEBUG
-#debug: true

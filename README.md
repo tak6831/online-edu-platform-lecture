@@ -1,3 +1,30 @@
+### Kafka 기능 추가
+
+- kafka & zookeeper
+  - https://github.com/wurstmeister/kafka-docker
+
+
+- Producer
+  - [Config](https://github.com/radic2510/online-edu-platform-lecture/blob/main/src/main/java/com/example/onlineeduplatformlecture/config/KafkaProducerConfig.java)
+  - [Service](https://github.com/radic2510/online-edu-platform-lecture/blob/main/src/main/java/com/example/onlineeduplatformlecture/service/impl/RatingServiceImpl.java#L63)
+  ```java
+  // 별점 등록 시 Rating 정보 JSON 형태로 kafka 토픽에 등록
+  private void sendMessage(Rating rating) {
+      log.info(String.format("#### -> Producing message -> %s", rating.toString()));
+      this.ratingKafkaTemplate.send(TOPIC, rating);
+  }
+  ```
+
+- Consumer
+  - [Config](https://github.com/radic2510/online-edu-platform-lecture/blob/main/src/main/java/com/example/onlineeduplatformlecture/config/KafkaConsumerConfig.java)
+  - [Service](https://github.com/radic2510/online-edu-platform-lecture/blob/main/src/main/java/com/example/onlineeduplatformlecture/service/impl/RatingServiceImpl.java#L69)
+  ```java
+  // 토픽 등록된 정보를 가져와서 해당 정보를 출력
+  @KafkaListener(topics = TOPIC, groupId = "rating", containerFactory = "greetingKafkaListenerContainerFactory")
+  public void consume(Rating rating) {
+      System.out.printf("Consumed message : %s%n", rating.getRatingId());
+  }
+  ```
 
 ### Lecture
 

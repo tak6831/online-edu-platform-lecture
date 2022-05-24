@@ -25,12 +25,11 @@ public class Lecture {
 
     private String location;
 
+    private int exposedYn;
 
-    private Long exposedYn;
+    private LocalDateTime createdAt;
 
-    private Timestamp createdAt;
-
-    private Timestamp updatedAt;
+    private LocalDateTime updatedAt;
 
     public Lecture(Long lectureId, String title, String location, long exposedYn, LocalDateTime now, LocalDateTime now1) {
     }
